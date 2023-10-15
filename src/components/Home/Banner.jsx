@@ -1,26 +1,25 @@
+import Image from "next/image";
+import streetFoodImg from "../../assets/streetFood.png";
+
 const Banner = () => {
   return (
     <div>
-      <div
-        className="hero min-h-[70vh]"
-        style={{
-          backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
-        }}
-      >
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-            <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-            <button className="btn btn-primary">Get Started</button>
-          </div>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-12">
+        <div className="flex place-items-center">
+          <h1 className="text-xl md:text-3xl lg:text-5xl font-bold">
+            Delivering the flavors you crave, to your doorstep
+          </h1>
         </div>
-      </div>
+        <div>
+          <Image
+            src={streetFoodImg}
+            className="mx-auto"
+            height={500}
+            width={500}
+            alt="street-food"
+          />
+        </div>
+      </section>
     </div>
   );
 };

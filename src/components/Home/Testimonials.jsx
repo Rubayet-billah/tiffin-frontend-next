@@ -1,24 +1,60 @@
-import { testimonials } from "../../constants/constants";
+"use client";
+import { testimonials } from "@/constants/constants";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 
 const Testimonials = () => {
-  // Define an array of sample testimonials (replace with actual data)
-
   return (
-    <section className="py-12">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-4">Reviews</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="p-4 bg-gray-200 shadow-md rounded-lg">
-              <p className="text-gray-700">{testimonial.feedback}</p>
-              <div className="mt-auto">
-                <strong>{testimonial.author}</strong>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="container mx-auto px-5 md:px-0 py-12">
+      <div className="text-center mb-8">
+        <h3 className="text-4xl font-bold mb-1">What Our User Say About Us</h3>
+        <p className="capitalize">Some Of Our User Reviews.</p>
       </div>
-    </section>
+
+      <Swiper
+        spaceBetween={36}
+        loop={true}
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+        }}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        grabCursor={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+        breakpoints={{
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1,
+          },
+          // when window width is >= 992px
+          992: {
+            slidesPerView: 2,
+          },
+          // when window width is >= 1280px
+          1280: {
+            slidesPerView: 3,
+          },
+        }}
+      >
+        {testimonials?.map((review) => (
+          <SwiperSlide
+            className="mb-12 pt-10 pb-6 px-6 bg-gray-100 rounded-lg"
+            key={review.id}
+          >
+            <div className="">
+              <p className="text-center">{review.review}</p>
+              <div className="mt-6 text-center">
+                <p className="font-medium">{review.fullName}</p>
+                <p className="text-sm text-gray-600">{review.position}</p>
+              </div>
+              <p className="absolute top-1 left-2 text-7xl opacity-10">🙶</p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 
