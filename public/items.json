@@ -8,22 +8,44 @@
     "price": 12.99,
     "isNew": false,
     "location": "Dhaka, Bangladesh",
-    "contact": "+8801875685814",
-    "provider": "Pizza World",
-    "quantity": 10
+    "contactInfo": "+8801875685814",
+    "available": true,
+    "provider": "Sultans Dine",
+    "quantity": 10,
+    "reviews": [
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      },
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      }
+    ]
   },
   {
     "id": 2,
     "name": "Sushi Platter",
     "description": "Assorted sushi rolls with soy sauce and wasabi.",
-    "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3VzaHx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3VzaHx8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=500&q=60",
     "category": "Sushi",
     "price": 18.99,
     "isNew": true,
-    "location": "Tokyo, Japan",
-    "contact": "+810123456789",
-    "provider": "Sushi Heaven",
-    "quantity": 20
+    "location": "Dhaka, Bangladesh",
+    "contactInfo": "+8801875685814",
+    "available": true,
+    "provider": "Sultans Dine",
+    "quantity": 10,
+    "reviews": [
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      },
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      }
+    ]
   },
   {
     "id": 3,
@@ -33,10 +55,21 @@
     "category": "Burgers",
     "price": 9.99,
     "isNew": false,
-    "location": "New York, USA",
-    "contact": "+12015551234",
-    "provider": "Burger Delight",
-    "quantity": 15
+    "location": "Dhaka, Bangladesh",
+    "contactInfo": "+8801875685814",
+    "available": true,
+    "provider": "Sultans Dine",
+    "quantity": 10,
+    "reviews": [
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      },
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      }
+    ]
   },
   {
     "id": 4,
@@ -46,22 +79,44 @@
     "category": "Asian",
     "price": 14.99,
     "isNew": true,
-    "location": "Bangkok, Thailand",
-    "contact": "+660212345678",
-    "provider": "Thai Delights",
-    "quantity": 12
+    "location": "Dhaka, Bangladesh",
+    "contactInfo": "+8801875685814",
+    "available": true,
+    "provider": "Sultans Dine",
+    "quantity": 10,
+    "reviews": [
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      },
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      }
+    ]
   },
   {
     "id": 5,
     "name": "Caesar Salad",
     "description": "Fresh salad with romaine lettuce and Caesar dressing.",
-    "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D&auto.format&fit=crop&w=500&q=60",
+    "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
     "category": "Salads",
     "price": 7.99,
     "isNew": false,
-    "location": "Los Angeles, USA",
-    "contact": "+13235551212",
-    "provider": "Salad Delights",
-    "quantity": 25
+    "location": "Dhaka, Bangladesh",
+    "contactInfo": "+8801875685814",
+    "available": true,
+    "provider": "Sultans Dine",
+    "quantity": 10,
+    "reviews": [
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      },
+      {
+        "userEmail": "abc@gmail.com",
+        "comment": "Nice and yummy"
+      }
+    ]
   }
 ]

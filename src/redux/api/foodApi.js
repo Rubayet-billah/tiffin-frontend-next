@@ -2,11 +2,9 @@ const { baseApi } = require("./baseApi");
 
 const foodApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getFoods: builder.query(() => ({
-      query: () => ({
-        url: "/items.json",
-      }),
-    })),
+    getFoods: builder.query({
+      query: () => "/food-items",
+    }),
   }),
 });
 
