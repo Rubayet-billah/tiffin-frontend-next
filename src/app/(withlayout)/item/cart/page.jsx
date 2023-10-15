@@ -1,5 +1,6 @@
 "use client";
 import CartTable from "@/components/ui/CartTable";
+import PageHeading from "@/components/ui/PageHeading";
 import { addOrder } from "@/redux/features/orderSlice";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -41,10 +42,10 @@ const CartPage = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-xl p-4 w-full mx-auto">
-      <h2 className="text-3xl font-semibold">Place Your Order</h2>
+      <PageHeading title="Place Your Order" subTitle="Fill in the Details" />
 
       <section className="lg:flex justify-between gap-12">
-        <div>
+        <div className="w-full">
           <CartTable />
         </div>
         <form onSubmit={handleSubmit} className="w-full max-w-md mt-4">

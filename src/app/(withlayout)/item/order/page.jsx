@@ -1,6 +1,7 @@
 "use client";
 import CartTable from "@/components/ui/CartTable";
 import OrderTable from "@/components/ui/OrderTable";
+import PageHeading from "@/components/ui/PageHeading";
 import { useState } from "react";
 
 const OrderPage = () => {
@@ -23,7 +24,7 @@ const OrderPage = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-xl p-4 w-full mx-auto">
-      <h2 className="text-3xl font-semibold">My orders</h2>
+      <PageHeading title="My Orders" subTitle="View your order history" />
       <OrderTable />
     </div>
   );

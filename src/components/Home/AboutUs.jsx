@@ -1,10 +1,11 @@
 import Image from "next/image";
 import aboutUs from "../../assets/aboutUs.png";
+import PageHeading from "../ui/PageHeading";
 const AboutUs = () => {
   return (
     <div>
       {" "}
-      <h1 className="text-3xl font-bold">About Us</h1>
+      <PageHeading title="About Us" subTitle="Learn More About Our Team" />
       <div className="hero place-items-start">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="lg:w-1/2 flex justify-center">
