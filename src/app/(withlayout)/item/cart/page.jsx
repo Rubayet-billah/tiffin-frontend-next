@@ -1,6 +1,9 @@
 "use client";
 import CartTable from "@/components/ui/CartTable";
+import { addOrder } from "@/redux/features/orderSlice";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartPage = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +11,9 @@ const CartPage = () => {
     location: "",
     notes: "",
   });
+  const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +22,23 @@ const CartPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send the order to the backend)
-    console.log("Order submitted:", formData);
+
+    const orderedItems = cartItems?.filter((item) => item.isCheckedForOrder);
+    const userInfo = {
+      email: user?.email,
+      ...formData,
+    };
+    if (orderedItems?.length > 0) {
+      const order = {
+        userInfo,
+        orderItems: orderedItems,
+      };
+      console.log("if block hit");
+      dispatch(addOrder(order));
+    } else {
+      toast.error("Please select an item first");
+    }
+    console.log("Order submitted:", { userInfo, orderedItems });
   };
 
   return (
