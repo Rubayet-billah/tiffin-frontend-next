@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orders: [], // Array to store ordered food items
+  orders: [{ userInfo: null, orders: [] }],
 };
 
 const orderSlice = createSlice({
@@ -10,7 +10,6 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     addOrder: (state, action) => {
-      // Add a new order to the orders array
       state.orders.push(action.payload);
     },
     removeOrder: (state, action) => {

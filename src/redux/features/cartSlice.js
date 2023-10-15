@@ -19,8 +19,25 @@ const cartSlice = createSlice({
         existingItem.quantityInCart += 1;
       } else {
         newItem.quantityInCart = 1;
-        state.cartItems.push(newItem);
+        state.cartItems.push({ ...newItem, isCheckedForOrder: true });
       }
+    },
+    isCheckedForOrder: (state, action) => {
+      const itemIdToToggle = action.payload;
+      const updatedCartItems = state.cartItems.map((item) => {
+        if (item.id === itemIdToToggle) {
+          return {
+            ...item,
+            isCheckedForOrder: !item.isCheckedForOrder,
+          };
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+      };
     },
 
     incrementQuantity: (state, action) => {
@@ -79,6 +96,7 @@ export const {
   incrementQuantity,
   decrementQuantity,
   deleteItemFromCart,
+  isCheckedForOrder,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

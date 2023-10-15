@@ -20,6 +20,9 @@ const Navigation = () => {
         <Link href="/item">Food Items</Link>
       </li>
       <li>
+        <Link href="/item/cart">Cart</Link>
+      </li>
+      <li>
         <Link href="/item/order">Cart</Link>
       </li>
     </>

@@ -2,6 +2,7 @@ import {
   decrementQuantity,
   incrementQuantity,
   deleteItemFromCart,
+  isCheckedForOrder,
 } from "@/redux/features/cartSlice";
 import Image from "next/image";
 import React from "react";
@@ -19,6 +20,18 @@ const CartTable = () => {
   const handleDecrement = (itemId) => {
     dispatch(decrementQuantity(itemId));
   };
+
+  const handleCheckOrder = (itemId) => {
+    dispatch(isCheckedForOrder(itemId));
+  };
+
+  const neatTotalPrice = cartItems
+    .filter((item) => item.isCheckedForOrder) // Filter items that are marked for order
+    .reduce((total, item) => {
+      const itemPrice = item.price; // Assuming each item has a `price` property
+      const itemQuantity = item.quantityInCart; // Assuming each item has a `quantityInCart` property
+      return total + itemPrice * itemQuantity;
+    }, 0);
 
   return (
     <div>
@@ -39,6 +52,7 @@ const CartTable = () => {
                 <td>
                   <label>
                     <input
+                      onClick={() => handleCheckOrder(item.id)}
                       type="checkbox"
                       className="checkbox"
                       defaultChecked
@@ -95,6 +109,9 @@ const CartTable = () => {
               </tr>
             ))}
           </tbody>
+          <div className="text-xl font-bold mt-auto">
+            Total Price: {neatTotalPrice.toFixed(2)}
+          </div>
         </table>
       </div>
     </div>
