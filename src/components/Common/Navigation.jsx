@@ -14,10 +14,13 @@ const Navigation = () => {
   const menu = (
     <>
       <li>
-        <Link href="/item/order">Cart</Link>
+        <Link href="/home">Home</Link>
       </li>
       <li>
-        <Link href="/home">Home</Link>
+        <Link href="/item">Food Items</Link>
+      </li>
+      <li>
+        <Link href="/item/order">Cart</Link>
       </li>
     </>
   );

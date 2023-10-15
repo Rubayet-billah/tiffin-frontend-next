@@ -9,7 +9,6 @@ const Homepage = () => {
       {/* <AboutUs /> */}
       {/* <ItemDetails /> */}
       {/* <OrderForm /> */}
-      <div className="text-5xl">Hi there</div>
       <Login />
     </div>
   );

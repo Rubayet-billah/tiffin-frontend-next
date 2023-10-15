@@ -1,6 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 import ItemCard from "../FoodItem/ItemCard";
+import Link from "next/link";
 
 const FeaturedContent = () => {
   const { foodItems } = useSelector((state) => state.food);
@@ -15,9 +16,8 @@ const FeaturedContent = () => {
             ?.map((item, idx) => (
               <ItemCard key={idx} item={item} />
             ))}
-
-          {/* Repeat this structure for additional featured items */}
         </div>
+        <Link href='/item' className="btn btn-warning my-6">View All Items</Link>
       </div>
     </section>
   );

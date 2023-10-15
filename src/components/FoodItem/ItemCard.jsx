@@ -12,7 +12,7 @@ const ItemCard = ({ item }) => {
   return (
     <div
       onClick={handleView}
-      className="card md:w-96 bg-base-100 shadow-xl rounded hover:scale-105 duration-200 cursor-pointer"
+      className="card md:w-96 bg-base-100 shadow-xl rounded hover:scale-[1.03] duration-200 cursor-pointer"
     >
       <figure>
         <Image src={image} alt={name} width={500} height={500} />

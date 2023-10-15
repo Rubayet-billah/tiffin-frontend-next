@@ -1,17 +1,23 @@
+import {
+  decrementQuantity,
+  incrementQuantity,
+  deleteItemFromCart,
+} from "@/redux/features/cartSlice";
 import Image from "next/image";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const CartTable = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleIncrement = (itemId) => {
-    // dispatch(incrementQuantity(itemId));
+    dispatch(incrementQuantity(itemId));
   };
 
   const handleDecrement = (itemId) => {
-    // dispatch(decrementQuantity(itemId));
+    dispatch(decrementQuantity(itemId));
   };
 
   return (
@@ -20,11 +26,7 @@ const CartTable = () => {
         <table className="table">
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
+              <th></th>
               <th>Name</th>
               <th>Quantity</th>
               <th>Price</th>
@@ -36,7 +38,11 @@ const CartTable = () => {
               <tr key={item.id}>
                 <td>
                   <label>
-                    <input type="checkbox" className="checkbox" />
+                    <input
+                      type="checkbox"
+                      className="checkbox"
+                      defaultChecked
+                    />
                   </label>
                 </td>
                 <td>
@@ -74,9 +80,17 @@ const CartTable = () => {
                     </button>
                   </div>
                 </td>
-                <td>${item.price.toFixed(2)}</td>
+                <td>${item.price.toFixed(2) * +item.quantityInCart}</td>
                 <td>
                   <button className="btn btn-ghost btn-xs">Details</button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => dispatch(deleteItemFromCart(item.id))}
+                    className="btn btn-error text-white text-2xl"
+                  >
+                    <AiOutlineDelete />
+                  </button>
                 </td>
               </tr>
             ))}
