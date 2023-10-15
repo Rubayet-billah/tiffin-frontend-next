@@ -8,9 +8,6 @@ const ItemDetails = ({ params }) => {
   const { foodItems } = useSelector((state) => state.food);
   const dispatch = useDispatch();
   const item = { ...foodItems?.find((item) => item.id == +params.id) };
-  item.location = "Dhaka,bangladesh";
-  item.contactInfo = "+8801875685814";
-  item.available = true;
 
   return (
     <div className="bg-white rounded shadow-xl p-4 w-full max-w-5xl mx-auto">
