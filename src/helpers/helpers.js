@@ -49,3 +49,11 @@ export const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
+
+export const getMyOrders = (orders, user) => {
+  const myOrders = orders?.find(
+    (order) => order.userInfo.email === user?.email
+  );
+  console.log(myOrders);
+  return myOrders;
+};

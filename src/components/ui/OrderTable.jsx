@@ -1,4 +1,5 @@
 "use client";
+import { getMyOrders } from "@/helpers/helpers";
 import Image from "next/image";
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -7,28 +8,39 @@ import { useSelector } from "react-redux";
 const OrderTable = () => {
   const { user } = useSelector((state) => state.auth);
   const { orders } = useSelector((state) => state.order);
-  console.log(user, orders, "from orderTable");
-  const myOrders = orders?.filter((order) => order.user.email === user.email);
+  const myOrders = getMyOrders(orders, user);
+  // const myOrders = [
+  //   {
+  //     id: 2,
+  //     name: "Sushi Platter",
+  //     description: "Assorted sushi rolls with soy sauce and wasabi.",
+  //     image:
+  //       "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3VzaGl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+  //     category: "Sushi",
+  //     price: 18.99,
+  //     isNew: true,
+  //     location: "Dhaka,bangladesh",
+  //     contactInfo: "+8801875685814",
+  //     available: true,
+  //     quantityInCart: 1,
+  //     isCheckedForOrder: true,
+  //   },
+  // ];
   return (
     <div>
       <table className="table">
         <thead>
           <tr>
-            <th></th>
             <th>Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th></th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>COD</th>
+            <th>Devery Time</th>
           </tr>
         </thead>
         <tbody>
-          {myOrders?.map((item) => (
+          {myOrders?.orderItems?.map((item) => (
             <tr key={item.id}>
-              <td>
-                <label>
-                  <input type="checkbox" className="checkbox" defaultChecked />
-                </label>
-              </td>
               <td>
                 <div className="flex items-center space-x-3">
                   <div className="avatar">
@@ -47,35 +59,10 @@ const OrderTable = () => {
                   </div>
                 </div>
               </td>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <button
-                    className="btn btn-xs btn-outline"
-                    onClick={() => handleDecrement(item.id)}
-                  >
-                    -
-                  </button>
-                  <span className="mx-1">{item.quantityInCart}</span>
-                  <button
-                    className="btn btn-xs btn-outline"
-                    onClick={() => handleIncrement(item.id)}
-                  >
-                    +
-                  </button>
-                </div>
-              </td>
+              <td>{user?.email} </td>
+              <td>{myOrders?.userInfo.location}</td>
               <td>${item.price.toFixed(2) * +item.quantityInCart}</td>
-              <td>
-                <button className="btn btn-ghost btn-xs">Details</button>
-              </td>
-              <td>
-                <button
-                  onClick={() => dispatch(deleteItemFromCart(item.id))}
-                  className="btn btn-error text-white text-2xl"
-                >
-                  <AiOutlineDelete />
-                </button>
-              </td>
+              <td>30 min</td>
             </tr>
           ))}
         </tbody>

@@ -33,12 +33,10 @@ const CartPage = () => {
         userInfo,
         orderItems: orderedItems,
       };
-      console.log("if block hit");
       dispatch(addOrder(order));
     } else {
       toast.error("Please select an item first");
     }
-    console.log("Order submitted:", { userInfo, orderedItems });
   };
 
   return (

@@ -11,7 +11,6 @@ const orderSlice = createSlice({
   reducers: {
     addOrder: (state, action) => {
       const order = action.payload;
-      console.log(order);
       const existingUserOrders = state.orders.filter(
         (existingOrder) =>
           existingOrder?.userInfo?.email === order?.userInfo?.email
