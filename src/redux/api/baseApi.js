@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const BASE_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000";
+  process.env.NEXT_PUBLIC_NODE_ENV === "development"
+    ? "http://localhost:5000"
+    : "https://tiffin-server.vercel.app";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
