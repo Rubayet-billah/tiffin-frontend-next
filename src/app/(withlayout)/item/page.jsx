@@ -20,6 +20,12 @@ const ItemsPage = () => {
   const { data: foodItems, isLoading } = useGetFoodsQuery();
   const dispatch = useDispatch();
 
+  //pagination states
+  const [page, setPage] = useState(1);
+  const [limit, setlimit] = useState(2);
+  const skip = page * limit - limit;
+  const totalPageNo = Math.ceil(foodItems?.length / limit);
+
   const handleSearch = () => {
     dispatch(updateSearchQuery(searchValue));
   };
@@ -69,9 +75,12 @@ const ItemsPage = () => {
           return true;
         }
       })
+      .slice(skip, skip + limit)
       .map((item, idx) => <ItemCard key={idx} item={item} />);
   } else {
-    content = foodItems?.map((item, idx) => <ItemCard key={idx} item={item} />);
+    content = foodItems
+      ?.slice(skip, skip + limit)
+      .map((item, idx) => <ItemCard key={idx} item={item} />);
   }
 
   if (isLoading) {
@@ -136,6 +145,34 @@ const ItemsPage = () => {
           <p>No results found.</p>
         )}
       </div>
+      <section className="flex mt-5 justify-center gap-3">
+        <div className="join rounded-none">
+          {Array.from({ length: totalPageNo }, (_, i) => i + 1).map((key) => (
+            <button
+              key={key}
+              onClick={() => setPage(key)}
+              className={`join-item btn ${
+                page == key && "btn-active"
+              } mx-1 rounded`}
+            >
+              {key}
+            </button>
+          ))}
+        </div>
+        <div className="bg-base-200 rounded flex gap-3">
+          <select
+            className="select"
+            onChange={(e) => setlimit(+e.target.value)}
+          >
+            <option value={limit}>Per Page</option>
+            {[2, 5, 10].map((ct, idx) => (
+              <option key={idx} value={ct}>
+                {ct}
+              </option>
+            ))}
+          </select>
+        </div>
+      </section>
     </div>
   );
 };
