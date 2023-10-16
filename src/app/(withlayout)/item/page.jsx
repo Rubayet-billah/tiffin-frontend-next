@@ -6,6 +6,7 @@ import {
   updateSearchQuery,
   updateSortingOption,
   updateFilteringOption,
+  resetFilters,
 } from "@/redux/features/filterSlice";
 import ItemCard from "@/components/FoodItem/ItemCard";
 import PageHeading from "@/components/ui/PageHeading";
@@ -31,22 +32,46 @@ const ItemsPage = () => {
     console.log(event.target.value);
     dispatch(updateFilteringOption(event.target.value));
   };
+
+  const handleReset = () => {
+    setSearchValue("");
+    dispatch(resetFilters());
+  };
+
   let content;
 
-  if (searchQuery && foodItems) {
-    const filteredFoodItems = foodItems.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (filteredFoodItems.length > 0) {
-      content = filteredFoodItems.map((item, idx) => (
-        <ItemCard key={idx} item={item} />
-      ));
-    } else {
-      content = <p>No results found.</p>;
-    }
-  } else if (foodItems) {
-    content = foodItems.map((item, idx) => <ItemCard key={idx} item={item} />);
+  if (
+    foodItems?.length > 0 &&
+    (searchQuery || sortingOption || filteringOption.category !== "All")
+  ) {
+    content = foodItems
+      .filter((item) => {
+        if (searchQuery) {
+          const searchRegex = new RegExp(searchQuery, "i");
+          return item.name.match(searchRegex);
+        } else {
+          return true;
+        }
+      })
+      .sort((a, b) => {
+        if (sortingOption === "priceLowToHigh") {
+          return a.price - b.price;
+        } else if (sortingOption === "priceHighToLow") {
+          return b.price - a.price;
+        } else {
+          return 0;
+        }
+      })
+      .filter((item) => {
+        if (filteringOption.category !== "All") {
+          return item.category === filteringOption.category;
+        } else {
+          return true;
+        }
+      })
+      .map((item, idx) => <ItemCard key={idx} item={item} />);
+  } else {
+    content = foodItems?.map((item, idx) => <ItemCard key={idx} item={item} />);
   }
 
   if (isLoading) {
@@ -73,41 +98,33 @@ const ItemsPage = () => {
             Search
           </button>
         </div>
-
         <div className="flex gap-4 my-4">
           <select
             className="select select-bordered"
-            // value={sortingOption}
             onChange={handleSortingChange}
           >
             <option value="">Sort By</option>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-
-            {/* Add more sorting options as needed */}
+            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="priceHighToLow">Price: High to Low</option>
           </select>
-          {/* <button onClick={handleApplySorting} className="btn btn-primary btn-sm">
-          Apply Sorting
-        </button> */}
           <select
             className="select select-bordered"
-            // value={filteringOption}
             onChange={handleFilteringChange}
           >
-            <option value="">Filter By</option>
+            <option value="All">Filter By</option>
             {extractCategories(foodItems)?.map((ct, idx) => (
               <option key={idx} value={ct}>
                 {ct}
               </option>
             ))}
           </select>
-          {/* <button
-          onClick={handleApplyFiltering}
-          className="btn btn-primary btn-sm"
-        >
-          Apply Filtering
-        </button> */}
         </div>
+        <button
+          onClick={() => handleReset()}
+          className="btn btn-ghost btn-outline"
+        >
+          Reset
+        </button>
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
