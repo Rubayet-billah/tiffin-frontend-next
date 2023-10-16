@@ -15,7 +15,6 @@ export const store = configureStore({
     order: orderSlice,
     filter: filterSlice,
   },
-  preloadedState: {},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
 });

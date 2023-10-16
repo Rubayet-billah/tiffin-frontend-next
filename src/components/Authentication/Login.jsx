@@ -16,7 +16,7 @@ const Login = () => {
 
   const { control, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    dispatch(loginUser(data)).then(() => {
+    dispatch(loginUser(data)).then((data) => {
       toast.success("Logged in successful");
       router.push("/home");
     });

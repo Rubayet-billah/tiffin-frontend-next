@@ -1,3 +1,5 @@
+// thunkApi.js
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -5,7 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authKey } from "../../constants/constants";
+import { authKey, userRole } from "../../constants/constants";
 import app from "@/firebase/firebase.config";
 import { removeFromLocalStorage, setToLocalStorage } from "@/helpers/helpers";
 
@@ -23,7 +25,10 @@ export const registerUser = createAsyncThunk(
       );
       let user = {};
       user.uid = userCredential.user.uid;
+      user.name = userCredential.user.displayName;
       user.email = userCredential.user.email;
+      user.image = userCredential.user.photoURL;
+      user.role = userRole.customer;
       setToLocalStorage(authKey, user);
       return user;
     } catch (error) {
@@ -45,7 +50,10 @@ export const loginUser = createAsyncThunk(
       );
       let user = {};
       user.uid = userCredential.user.uid;
+      user.name = userCredential.user.displayName;
       user.email = userCredential.user.email;
+      user.image = userCredential.user.photoURL;
+      user.role = userRole.customer;
       setToLocalStorage(authKey, user);
       return user;
     } catch (error) {

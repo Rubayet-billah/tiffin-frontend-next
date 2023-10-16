@@ -1,4 +1,8 @@
 export const authKey = "USER";
+export const userRole = {
+  admin: "ADMIN",
+  customer: "CUSTOMER",
+};
 
 export const testimonials = [
   {

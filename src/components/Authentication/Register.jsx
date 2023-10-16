@@ -6,13 +6,20 @@ import { registerUser } from "../../redux/thunkApi/thunkApi";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
+import { useCreateUserMutation } from "@/redux/api/authApi";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const { control, handleSubmit } = useForm();
+  const [createUser] = useCreateUserMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onSubmit = (data) => {
-    dispatch(registerUser(data));
+    dispatch(registerUser(data)).then((res) => {
+      createUser(res.payload);
+      router.push("/home");
+    });
     console.log(data);
   };
 
