@@ -57,3 +57,12 @@ export const getMyOrders = (orders, user) => {
   console.log(myOrders);
   return myOrders;
 };
+
+export const extractCategories = (foodItems) => {
+  const categories = foodItems?.reduce((categorySet, item) => {
+    categorySet.add(item.category);
+    return categorySet;
+  }, new Set());
+
+  return Array.from(categories);
+};

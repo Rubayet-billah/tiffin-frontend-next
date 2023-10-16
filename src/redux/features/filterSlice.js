@@ -3,10 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchQuery: "", // Initial search query
-  filters: {
+  sortingOption: "", // Initial sorting option
+  filteringOption: {
     // Define your filters here
     // Example filter:
-    // category: "All",
+    category: "All",
+    // Add more filters as needed
+    // Example filter:
+    // dietaryPreference: "Any",
   },
 };
 
@@ -18,10 +22,22 @@ const filterSlice = createSlice({
       const searchString = action.payload;
       state.searchQuery = searchString.toLowerCase();
     },
+    updateSortingOption: (state, action) => {
+      state.sortingOption = action.payload;
+    },
+    updateFilteringOption: (state, action) => {
+      // Example: Update the category filter
+      state.filteringOption.category = action.payload;
+    },
     // Add more filter-related actions here
+    // Example:
+    // updateDietaryPreferenceFilter: (state, action) => {
+    //   state.filters.dietaryPreference = action.payload;
+    // },
   },
 });
 
-export const { updateSearchQuery } = filterSlice.actions;
+export const { updateSearchQuery, updateSortingOption, updateFilteringOption } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
