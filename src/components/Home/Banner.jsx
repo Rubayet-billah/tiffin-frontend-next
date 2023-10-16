@@ -1,8 +1,25 @@
+"use client";
 import Image from "next/image";
 import streetFoodImg from "../../assets/streetFood.png";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateSearchQuery } from "@/redux/features/filterSlice";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
-  const handleSearch = () => {};
+  const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleSearch = () => {
+    dispatch(updateSearchQuery(searchQuery));
+    router.push("/item");
+  };
+
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div>
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-12">
@@ -15,7 +32,9 @@ const Banner = () => {
               <input
                 className="input input-sm w-full rounded-sm"
                 type="text"
-                placeholder="Search your desire food"
+                placeholder="Search your desired meal"
+                value={searchQuery}
+                onChange={handleInputChange}
               />
               <button
                 onClick={() => handleSearch()}

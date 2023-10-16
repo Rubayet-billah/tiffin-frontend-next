@@ -4,6 +4,7 @@ import authSlice from "./features/authSlice";
 import foodSlice from "./features/foodSlice";
 import orderSlice from "./features/orderSlice";
 import cartSlice from "./features/cartSlice";
+import filterSlice from "./features/filterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     food: foodSlice,
     cart: cartSlice,
     order: orderSlice,
+    filter: filterSlice,
   },
   preloadedState: {},
   middleware: (getDefaultMiddleware) =>
