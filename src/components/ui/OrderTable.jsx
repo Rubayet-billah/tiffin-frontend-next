@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -8,7 +9,7 @@ const OrderTable = () => {
   const { user } = useSelector((state) => state.auth);
   const { orders } = useSelector((state) => state.order);
   const myOrders = getMyOrders(orders, user);
-  if (myOrders?.orderItems?.length < 1) {
+  if (!myOrders?.orderItems?.length) {
     return (
       <div className="text-center text-xl">Sorry, no items ordered yet.</div>
     );

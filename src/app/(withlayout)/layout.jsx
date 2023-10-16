@@ -2,6 +2,7 @@
 
 import Footer from "@/components/Common/Footer";
 import Navigation from "@/components/Common/Navigation";
+import SideBar from "@/components/Common/SideBar";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
@@ -24,6 +25,14 @@ const MainLayout = ({ children }) => {
       </main>
       <Footer />
       <Toaster />
+
+      {/* <SideBar>
+        <main className="w-full max-w-[1440px] mx-auto p-5 md:p-12 min-h-[100vh]">
+          {children}
+        </main>
+        <Footer />
+      </SideBar>
+      <Toaster /> */}
     </div>
   );
 };
