@@ -2,7 +2,7 @@
 
 ## Live Link
 
-You can access the live version of this project by clicking [here](https://your-live-link.com).
+You can access the live version of this project by clicking [here](https://tiffin-frontend-next.vercel.app).
 
 **Admin Credentials:**
 
