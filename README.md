@@ -1,13 +1,15 @@
 # Tiffin Delivery Project
 
-## Live Link
-
-You can access the live version of this project by clicking [here](https://tiffin-frontend-next.vercel.app).
+**Live Link:** [Tiffin App](https://tiffin-frontend-next.vercel.app/)
 
 **Admin Credentials:**
 
 - **Email**: admin@gmail.com
 - **Password**: 123456
+
+## Project Overview
+
+The Tiffin Delivery Project is a comprehensive web application for managing and ordering tiffin meals. It provides users with a convenient platform to explore and order delicious meals. Admins have access to the admin panel for managing food items and user accounts.
 
 ## Features
 
