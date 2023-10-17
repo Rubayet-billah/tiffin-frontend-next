@@ -6,12 +6,18 @@ import { addItemToCart } from "@/redux/features/cartSlice";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import UserReview from "@/components/FoodItem/UserReview";
+import toast from "react-hot-toast";
 
 const ItemDetails = ({ params }) => {
   const { foodItems } = useSelector((state) => state.food);
   const dispatch = useDispatch();
   const router = useRouter();
   const item = foodItems?.find((item) => item.id == +params.id);
+
+  const handleAddtoCart = (item) => {
+    dispatch(addItemToCart(item));
+    toast.success(`${item.name} added to cart`);
+  };
 
   useEffect(() => {
     if (!item) {
@@ -70,7 +76,7 @@ const ItemDetails = ({ params }) => {
               Order Now
             </Link>
             <button
-              onClick={() => dispatch(addItemToCart(item))}
+              onClick={() => handleAddtoCart(item)}
               className="px-4 py-2 bg-green-500 text-white rounded hover-bg-green-600"
             >
               Add to Cart

@@ -6,6 +6,7 @@ import { logoutUser } from "@/redux/thunkApi/thunkApi";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { userRole } from "@/constants/constants";
+import { FiLogOut } from "react-icons/fi";
 
 const Navigation = () => {
   const { user } = useSelector((state) => state.auth);
@@ -91,9 +92,8 @@ const Navigation = () => {
       </div>
       <div className="navbar-end">
         {user?.email ? (
-          <div className="lg:flex items-center gap-2">
+          <div className="lg:flex items-center gap-2 lg:gap-5">
             <div className="items-center gap-1 hidden md:flex">
-              <span>{user?.email}</span>
               <div className="avatar online">
                 <div className="w-10 rounded-full">
                   <Image
@@ -104,9 +104,14 @@ const Navigation = () => {
                   />
                 </div>
               </div>
+              <span>{user?.email}</span>
             </div>
-            <button onClick={logoutHandler} className="btn btn-warning">
-              Log out
+            <button
+              onClick={logoutHandler}
+              className="text-red-500 text-2xl"
+              title="Logout"
+            >
+              <FiLogOut />
             </button>
           </div>
         ) : (

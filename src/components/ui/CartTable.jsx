@@ -8,6 +8,7 @@ import Image from "next/image";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
+import Link from "next/link";
 
 const CartTable = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -118,7 +119,15 @@ const CartTable = () => {
           </table>
         </div>
       ) : (
-        <div className="text-center text-xl">Sorry no items added yet</div>
+        <div className="text-center text-xl">
+          Sorry no items added yet{" "}
+          <Link
+            href="/item"
+            className="text-blue-600 font-bold hover:underline"
+          >
+            Browse Item
+          </Link>
+        </div>
       )}
     </div>
   );

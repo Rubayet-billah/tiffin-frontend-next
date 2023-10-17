@@ -2,6 +2,7 @@
 import CartTable from "@/components/ui/CartTable";
 import PageHeading from "@/components/ui/PageHeading";
 import { addOrder } from "@/redux/features/orderSlice";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +37,8 @@ const CartPage = () => {
         orderItems: orderedItems,
       };
       dispatch(addOrder(order));
+      toast.success("Order placed");
+      router.push("/item/order");
     } else {
       toast.error("Please select an item first");
     }

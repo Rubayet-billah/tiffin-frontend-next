@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { getMyOrders } from "@/helpers/helpers";
+import Link from "next/link";
 
 const OrderTable = () => {
   const { user } = useSelector((state) => state.auth);
@@ -11,7 +12,12 @@ const OrderTable = () => {
   const myOrders = getMyOrders(orders, user);
   if (!myOrders?.orderItems?.length) {
     return (
-      <div className="text-center text-xl">Sorry, no items ordered yet.</div>
+      <div className="text-center text-xl">
+        Sorry, no items ordered yet{" "}
+        <Link href="/item" className="text-blue-600 font-bold hover:underline">
+          Browse Item
+        </Link>
+      </div>
     );
   }
 
