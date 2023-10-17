@@ -3,12 +3,13 @@ import ItemCard from "../FoodItem/ItemCard";
 import Link from "next/link";
 import PageHeading from "../ui/PageHeading";
 import { useGetFoodsQuery } from "@/redux/api/foodApi";
+import Loading from "../ui/Loading";
 
 const FeaturedContent = () => {
   const { data: foodItems, isLoading } = useGetFoodsQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <section className="py-12">

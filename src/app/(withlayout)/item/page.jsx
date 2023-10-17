@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFoodsQuery } from "@/redux/api/foodApi";
 import {
@@ -11,6 +11,7 @@ import {
 import ItemCard from "@/components/FoodItem/ItemCard";
 import PageHeading from "@/components/ui/PageHeading";
 import { extractCategories } from "@/helpers/helpers";
+import Loading from "@/components/ui/Loading";
 
 const ItemsPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -22,9 +23,10 @@ const ItemsPage = () => {
 
   //pagination states
   const [page, setPage] = useState(1);
-  const [limit, setlimit] = useState(2);
+  const [limit, setlimit] = useState(5);
+  const [arrLength, setArrLength] = useState(foodItems?.length);
   const skip = page * limit - limit;
-  const totalPageNo = Math.ceil(foodItems?.length / limit);
+  const totalPageNo = Math.ceil(arrLength / limit);
 
   const handleSearch = () => {
     dispatch(updateSearchQuery(searchValue));
@@ -44,13 +46,15 @@ const ItemsPage = () => {
     dispatch(resetFilters());
   };
 
-  let content;
+  // let content;
+
+  let filteredFoodItems;
 
   if (
     foodItems?.length > 0 &&
     (searchQuery || sortingOption || filteringOption.category !== "All")
   ) {
-    content = foodItems
+    filteredFoodItems = foodItems
       .filter((item) => {
         if (searchQuery) {
           const searchRegex = new RegExp(searchQuery, "i");
@@ -74,17 +78,21 @@ const ItemsPage = () => {
         } else {
           return true;
         }
-      })
-      .slice(skip, skip + limit)
-      .map((item, idx) => <ItemCard key={idx} item={item} />);
+      });
   } else {
-    content = foodItems
-      ?.slice(skip, skip + limit)
-      .map((item, idx) => <ItemCard key={idx} item={item} />);
+    filteredFoodItems = foodItems;
   }
 
+  const content = filteredFoodItems
+    ?.slice(skip, skip + limit)
+    .map((item, idx) => <ItemCard key={idx} item={item} />);
+
+  useEffect(() => {
+    setArrLength(filteredFoodItems?.length);
+  }, [filteredFoodItems]);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -99,7 +107,7 @@ const ItemsPage = () => {
           <input
             className="input input-sm w-full rounded-sm"
             type="text"
-            placeholder="Search your desired meal"
+            placeholder="Search your desired meal i.e Burger, Pizza"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
           />
@@ -137,13 +145,7 @@ const ItemsPage = () => {
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : content ? (
-          content
-        ) : (
-          <p>No results found.</p>
-        )}
+        {isLoading ? <Loading /> : content ? content : <p>No results found.</p>}
       </div>
       <section className="flex mt-5 justify-center gap-3">
         <div className="join rounded-none">
