@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import userAvatar from "../../../../assets/userAvatar.png";
 import { updateUser } from "@/redux/features/authSlice";
+import Image from "next/image";
 
 const ProfileEditPage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -11,17 +12,18 @@ const ProfileEditPage = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(updateUser(data)); // Replace with your actual action for updating user data
-    console.log({ ...user, ...data });
+    dispatch(updateUser(data));
   };
 
   return (
     <div className="bg-white p-4 shadow-lg rounded-md mx-auto max-w-3xl">
       <div className="text-center mb-4">
-        <img
+        <Image
           src={user.image || userAvatar}
           alt="User Profile Picture"
           className="w-20 h-20 rounded-full mx-auto"
+          height={80}
+          width={80}
         />
         <h2 className="text-xl font-semibold mt-2">
           {user.name || "Anonymous User"}
