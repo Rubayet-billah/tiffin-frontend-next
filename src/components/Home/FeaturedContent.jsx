@@ -12,8 +12,9 @@ const FeaturedContent = () => {
         <PageHeading title="Hot Deals" subTitle="Checkout The Best Items" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Featured Content Items */}
-          {foodItems
+          {[...foodItems]
             ?.filter((item) => item.isNew)
+            .slice(0, 5)
             ?.map((item, idx) => (
               <ItemCard key={idx} item={item} />
             ))}

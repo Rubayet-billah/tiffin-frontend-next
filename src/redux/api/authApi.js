@@ -6,6 +6,7 @@ const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/users",
       }),
+      providesTags: ["USER"],
     }),
     createUser: builder.mutation({
       query: (data) => ({
@@ -23,6 +24,14 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["USER"],
+    }),
+    deleteUserFromDb: builder.mutation({
+      query: (email) => ({
+        url: `/users/${email}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["USER"],
     }),
   }),
 });
@@ -31,4 +40,5 @@ export const {
   useGetAllUsersQuery,
   useCreateUserMutation,
   useUpdateUserInDbMutation,
+  useDeleteUserFromDbMutation,
 } = authApi;

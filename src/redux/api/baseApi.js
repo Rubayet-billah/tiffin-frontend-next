@@ -8,6 +8,7 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: () => ({}),
+  tagTypes: ["USER"],
 });
 
 // Export hooks for usage in functional components, which are

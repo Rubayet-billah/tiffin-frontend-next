@@ -1,10 +1,34 @@
 "use client";
 
-import { useGetAllUsersQuery } from "@/redux/api/authApi";
+import {
+  useDeleteUserFromDbMutation,
+  useGetAllUsersQuery,
+} from "@/redux/api/authApi";
 import Image from "next/image";
+import userAvater from "../../../assets/userAvatar.png";
+import { AiOutlineDelete } from "react-icons/ai";
+import toast from "react-hot-toast";
+import { userRole } from "@/constants/constants";
 
 const UserManagementPage = () => {
   const { data: users } = useGetAllUsersQuery();
+  const [deleteUserFromDb] = useDeleteUserFromDbMutation();
+
+  const handleUserDelete = async (user) => {
+    const confirmation = window.confirm(
+      `Are you sure to delete this ${user.role}?`
+    );
+    if (user.role === userRole.admin) {
+      toast.error("Sorry you cant delete an admin");
+      return;
+    }
+    if (confirmation) {
+      const result = await deleteUserFromDb(user.email);
+      if (result.data.deletedCount > 0) {
+        toast.success("User deleted successfully");
+      }
+    }
+  };
 
   return (
     <div class="container mx-auto p-4">
@@ -30,53 +54,46 @@ const UserManagementPage = () => {
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             {users?.map((user) => (
-              <tr key={user._id}>
+              <tr key={user?._id}>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <Image
                         class="h-10 w-10 rounded-full"
-                        src={user.image || "user_avatar.jpg"}
+                        src={user?.image || userAvater}
                         height={40}
                         width={40}
-                        alt={user.name}
+                        alt={user?.name}
                       />
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-medium text-gray-900">
-                        {user.name || "N/A"}
+                        {user?.name || "N/A"}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <div class="text-sm text-gray-900">{user.email}</div>
+                  <div class="text-sm text-gray-900">{user?.email}</div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <span
                     class={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      user.role === "ADMIN"
+                      user?.role === "ADMIN"
                         ? "bg-green-100 text-green-800"
                         : "bg-blue-100 text-blue-800"
                     }`}
                   >
-                    {user.role}
+                    {user?.role}
                   </span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <a
-                    href={`edit/${user._id}`}
-                    class="text-indigo-600 hover:text-indigo-900"
+                  <button
+                    onClick={() => handleUserDelete(user)}
+                    class="text-red-600 hover:bg-red-100 p-1 rounded text-2xl"
                   >
-                    Edit
-                  </a>
-                  <span class="text-gray-300">|</span>
-                  <a
-                    href={`delete/${user._id}`}
-                    class="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </a>
+                    <AiOutlineDelete />
+                  </button>
                 </td>
               </tr>
             ))}
