@@ -2,6 +2,11 @@ const { baseApi } = require("./baseApi");
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query({
+      query: () => ({
+        url: "/users",
+      }),
+    }),
     createUser: builder.mutation({
       query: (data) => ({
         url: "/users",
@@ -22,4 +27,8 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation, useUpdateUserInDbMutation } = authApi;
+export const {
+  useGetAllUsersQuery,
+  useCreateUserMutation,
+  useUpdateUserInDbMutation,
+} = authApi;

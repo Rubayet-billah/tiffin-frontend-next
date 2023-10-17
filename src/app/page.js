@@ -1,6 +1,10 @@
+"use client";
 import Login from "@/components/Authentication/Login";
+import { useRouter } from "next/navigation";
 
 const Homepage = () => {
+  const router = useRouter();
+  router.push("/home");
   return (
     <div>
       {/* <Banner /> */}
@@ -9,7 +13,7 @@ const Homepage = () => {
       {/* <AboutUs /> */}
       {/* <ItemDetails /> */}
       {/* <OrderForm /> */}
-      <Login />
+      {/* <Login /> */}
     </div>
   );
 };

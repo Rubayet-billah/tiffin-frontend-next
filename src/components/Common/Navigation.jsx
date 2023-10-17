@@ -13,7 +13,7 @@ const Navigation = () => {
   const router = useRouter();
 
   const menu =
-    user.email === userRole.admin ? (
+    user?.email === userRole.admin ? (
       <>
         <li>
           <Link href="/home">Home</Link>
@@ -27,6 +27,9 @@ const Navigation = () => {
         <li>
           <Link href="/item/order">My Orders</Link>
         </li>
+        <li>
+          <Link href="/profile">Profile</Link>
+        </li>
       </>
     ) : (
       <>
@@ -34,7 +37,10 @@ const Navigation = () => {
           <Link href="/home">Home</Link>
         </li>
         <li>
-          <Link href="/home">Manage Users</Link>
+          <Link href="/user-management">Manage Users</Link>
+        </li>
+        <li>
+          <Link href="/profile">Profile</Link>
         </li>
       </>
     );

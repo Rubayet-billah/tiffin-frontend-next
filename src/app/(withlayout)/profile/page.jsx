@@ -36,7 +36,6 @@ const UserProfile = () => {
           <Link href="/profile/edit" className="btn btn-sm btn-primary">
             Edit Profile
           </Link>
-          <button className="btn btn-sm btn-danger ml-2">Logout</button>
         </div>
 
         <div className="mt-4">
