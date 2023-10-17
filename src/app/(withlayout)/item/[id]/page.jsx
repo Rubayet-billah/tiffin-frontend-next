@@ -1,29 +1,25 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Image from "next/image";
 import Link from "next/link";
 import { addItemToCart } from "@/redux/features/cartSlice";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import UserReview from "@/components/FoodItem/UserReview";
 import toast from "react-hot-toast";
+import { useGetFoodItemQuery } from "@/redux/api/foodApi";
+import Loading from "@/components/ui/Loading";
 
 const ItemDetails = ({ params }) => {
-  const { foodItems } = useSelector((state) => state.food);
+  const { data: item, isLoading } = useGetFoodItemQuery(+params.id);
   const dispatch = useDispatch();
-  const router = useRouter();
-  const item = foodItems?.find((item) => item.id == +params.id);
 
   const handleAddtoCart = (item) => {
     dispatch(addItemToCart(item));
     toast.success(`${item.name} added to cart`);
   };
 
-  useEffect(() => {
-    if (!item) {
-      router.push("/404"); // Redirect to a 404 page if item is not found
-    }
-  }, [item, router]);
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="bg-white rounded shadow-xl p-4 w-full max-w-5xl mx-auto">

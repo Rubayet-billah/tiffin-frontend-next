@@ -5,7 +5,10 @@ const foodApi = baseApi.injectEndpoints({
     getFoods: builder.query({
       query: () => "/food-items",
     }),
+    getFoodItem: builder.query({
+      query: (id) => `/food-items/${id}`,
+    }),
   }),
 });
 
-export const { useGetFoodsQuery } = foodApi;
+export const { useGetFoodsQuery, useGetFoodItemQuery } = foodApi;
