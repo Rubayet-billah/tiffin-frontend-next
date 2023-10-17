@@ -53,7 +53,10 @@ export const loginUser = createAsyncThunk(
       user.name = userCredential.user.displayName;
       user.email = userCredential.user.email;
       user.image = userCredential.user.photoURL;
-      user.role = userRole.customer;
+
+      userCredential.user.email === "admin@gmail.com"
+        ? (user.role = userRole.admin)
+        : (user.role = userRole.customer);
       setToLocalStorage(authKey, user);
       return user;
     } catch (error) {

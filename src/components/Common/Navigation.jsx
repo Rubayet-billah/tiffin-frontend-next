@@ -5,28 +5,39 @@ import Link from "next/link";
 import { logoutUser } from "@/redux/thunkApi/thunkApi";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { userRole } from "@/constants/constants";
 
 const Navigation = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const menu = (
-    <>
-      <li>
-        <Link href="/home">Home</Link>
-      </li>
-      <li>
-        <Link href="/item">Food Items</Link>
-      </li>
-      <li>
-        <Link href="/item/cart">Cart</Link>
-      </li>
-      <li>
-        <Link href="/item/order">My Orders</Link>
-      </li>
-    </>
-  );
+  const menu =
+    user.email === userRole.admin ? (
+      <>
+        <li>
+          <Link href="/home">Home</Link>
+        </li>
+        <li>
+          <Link href="/item">Food Items</Link>
+        </li>
+        <li>
+          <Link href="/item/cart">Cart</Link>
+        </li>
+        <li>
+          <Link href="/item/order">My Orders</Link>
+        </li>
+      </>
+    ) : (
+      <>
+        <li>
+          <Link href="/home">Home</Link>
+        </li>
+        <li>
+          <Link href="/home">Manage Users</Link>
+        </li>
+      </>
+    );
 
   const logoutHandler = () => {
     dispatch(logoutUser()).then(() => {
