@@ -5,15 +5,25 @@ import { useDispatch } from "react-redux";
 import userAvatar from "../../../../assets/userAvatar.png";
 import { updateUser } from "@/redux/features/authSlice";
 import Image from "next/image";
+import { useUpdateUserInDbMutation } from "@/redux/api/authApi";
+import { useEffect } from "react";
 
 const ProfileEditPage = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+  const [updateUserInDb] = useUpdateUserInDbMutation();
 
   const onSubmit = (data) => {
     dispatch(updateUser(data));
+    updateUserInDb({ email: user?.email, data: { ...user, ...data } });
   };
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     updateUserInDb({ email: user?.email, data: user });
+  //   }
+  // }, [user, updateUserInDb]);
 
   return (
     <div className="bg-white p-4 shadow-lg rounded-md mx-auto max-w-3xl">

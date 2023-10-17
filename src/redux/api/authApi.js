@@ -15,7 +15,7 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
     updateUserInDb: builder.mutation({
-      query: (email, data) => {
+      query: ({ email, data }) => {
         console.log(email, data, "from api");
         return {
           url: `/users/${email}`,
