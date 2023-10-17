@@ -1,11 +1,15 @@
 "use client";
-import { useSelector } from "react-redux";
 import ItemCard from "../FoodItem/ItemCard";
 import Link from "next/link";
 import PageHeading from "../ui/PageHeading";
+import { useGetFoodsQuery } from "@/redux/api/foodApi";
 
 const FeaturedContent = () => {
-  const { foodItems } = useSelector((state) => state.food);
+  const { data: foodItems, isLoading } = useGetFoodsQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <section className="py-12">
       <div className="container mx-auto">
@@ -14,7 +18,7 @@ const FeaturedContent = () => {
           {/* Featured Content Items */}
           {[...foodItems]
             ?.filter((item) => item.isNew)
-            .slice(0, 5)
+            .slice(0, 6)
             ?.map((item, idx) => (
               <ItemCard key={idx} item={item} />
             ))}
