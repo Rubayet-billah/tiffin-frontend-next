@@ -1,7 +1,7 @@
 // authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser, registerUser, logoutUser } from "../thunkApi/thunkApi";
-import { getFromLocalStorage } from "@/helpers/helpers";
+import { getFromLocalStorage, setToLocalStorage } from "@/helpers/helpers";
 import { authKey } from "@/constants/constants";
 
 const initialState = {
@@ -13,7 +13,12 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+      setToLocalStorage(authKey, state.user);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -58,5 +63,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { updateUser } = authSlice.actions;
 
 export default authSlice.reducer;
