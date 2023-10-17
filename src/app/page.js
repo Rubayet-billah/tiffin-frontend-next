@@ -1,21 +1,17 @@
 "use client";
-import Login from "@/components/Authentication/Login";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Homepage = () => {
   const router = useRouter();
-  router.push("/home");
-  return (
-    <div>
-      {/* <Banner /> */}
-      {/* <FeaturedContent /> */}
-      {/* <Testimonials /> */}
-      {/* <AboutUs /> */}
-      {/* <ItemDetails /> */}
-      {/* <OrderForm /> */}
-      {/* <Login /> */}
-    </div>
-  );
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      router.push("/home");
+    }
+  }, [router]);
+
+  return <div>Redirecting to /home...</div>;
 };
 
 export default Homepage;

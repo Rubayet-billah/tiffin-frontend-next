@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetAllUsersQuery } from "@/redux/api/authApi";
+import Image from "next/image";
 
 const UserManagementPage = () => {
   const { data: users } = useGetAllUsersQuery();
@@ -33,9 +34,11 @@ const UserManagementPage = () => {
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
-                      <img
+                      <Image
                         class="h-10 w-10 rounded-full"
                         src={user.image || "user_avatar.jpg"}
+                        height={40}
+                        width={40}
                         alt={user.name}
                       />
                     </div>

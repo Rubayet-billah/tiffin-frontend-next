@@ -12,8 +12,22 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  console.log(user?.role);
+
   const menu =
-    user?.email === userRole.admin ? (
+    user?.role === userRole.admin ? (
+      <>
+        <li>
+          <Link href="/home">Home</Link>
+        </li>
+        <li>
+          <Link href="/user-management">Manage Users</Link>
+        </li>
+        <li>
+          <Link href="/profile">Profile</Link>
+        </li>
+      </>
+    ) : (
       <>
         <li>
           <Link href="/home">Home</Link>
@@ -26,18 +40,6 @@ const Navigation = () => {
         </li>
         <li>
           <Link href="/item/order">My Orders</Link>
-        </li>
-        <li>
-          <Link href="/profile">Profile</Link>
-        </li>
-      </>
-    ) : (
-      <>
-        <li>
-          <Link href="/home">Home</Link>
-        </li>
-        <li>
-          <Link href="/user-management">Manage Users</Link>
         </li>
         <li>
           <Link href="/profile">Profile</Link>
@@ -78,7 +80,7 @@ const Navigation = () => {
             {menu}
           </ul>
         </div>
-        <Link href="/" passHref>
+        <Link href="/home" passHref>
           <button className="btn btn-ghost upper-case text-2xl font-bold">
             Tiffin
           </button>

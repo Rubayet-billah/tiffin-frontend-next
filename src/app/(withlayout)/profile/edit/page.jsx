@@ -29,16 +29,16 @@ const ProfileEditPage = () => {
     <div className="bg-white p-4 shadow-lg rounded-md mx-auto max-w-3xl">
       <div className="text-center mb-4">
         <Image
-          src={user.image || userAvatar}
+          src={user?.image || userAvatar}
           alt="User Profile Picture"
           className="w-20 h-20 rounded-full mx-auto"
           height={80}
           width={80}
         />
         <h2 className="text-xl font-semibold mt-2">
-          {user.name || "Anonymous User"}
+          {user?.name || "Anonymous User"}
         </h2>
-        <p className="text-gray-500">{user.email}</p>
+        <p className="text-gray-500">{user?.email}</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -52,7 +52,7 @@ const ProfileEditPage = () => {
               type="text"
               id="name"
               name="name"
-              defaultValue={user.name}
+              defaultValue={user?.name}
               className="input input-bordered w-full"
               {...register("name")}
             />
@@ -65,7 +65,7 @@ const ProfileEditPage = () => {
               type="text"
               id="image"
               name="image"
-              defaultValue={user.image}
+              defaultValue={user?.image}
               className="input input-bordered w-full"
               {...register("image")}
             />
@@ -78,7 +78,7 @@ const ProfileEditPage = () => {
               type="tel"
               id="phone"
               name="phone"
-              defaultValue={user.phone}
+              defaultValue={user?.phone}
               className="input input-bordered w-full"
               {...register("phone")}
             />

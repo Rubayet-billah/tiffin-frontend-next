@@ -32,7 +32,7 @@ const Banner = () => {
               <input
                 className="input input-sm w-full rounded-sm"
                 type="text"
-                placeholder="Search your desired meal"
+                placeholder="Search your desired meal i.e Burger, Pizza"
                 value={searchQuery}
                 onChange={handleInputChange}
               />
