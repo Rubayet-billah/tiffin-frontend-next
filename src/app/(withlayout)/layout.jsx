@@ -25,14 +25,6 @@ const MainLayout = ({ children }) => {
       </main>
       <Footer />
       <Toaster />
-
-      {/* <SideBar>
-        <main className="w-full max-w-[1440px] mx-auto p-5 md:p-12 min-h-[100vh]">
-          {children}
-        </main>
-        <Footer />
-      </SideBar>
-      <Toaster /> */}
     </div>
   );
 };

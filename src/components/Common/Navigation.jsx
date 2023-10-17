@@ -12,8 +12,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  console.log(user?.role);
-
   const menu =
     user?.role === userRole.admin ? (
       <>
@@ -80,10 +78,12 @@ const Navigation = () => {
             {menu}
           </ul>
         </div>
-        <Link href="/home" passHref>
-          <button className="btn btn-ghost upper-case text-2xl font-bold">
-            Tiffin
-          </button>
+        <Link
+          href="/home"
+          className="btn btn-ghost upper-case text-2xl font-bold"
+          passHref
+        >
+          Tiffin
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -110,8 +110,8 @@ const Navigation = () => {
             </button>
           </div>
         ) : (
-          <Link href="/login" passHref>
-            <button className="btn btn-warning">Login</button>
+          <Link href="/login" className="btn btn-warning" passHref>
+            Login
           </Link>
         )}
       </div>
