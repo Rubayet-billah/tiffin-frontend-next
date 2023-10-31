@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useGetFoodItemQuery } from "@/redux/api/foodApi";
 import Loading from "@/components/ui/Loading";
 import { useRouter } from "next/navigation";
+import ReviewInputForm from "@/components/FoodItem/ReviewInputForm";
 
 const ItemDetails = ({ params }) => {
   const { data: item, isLoading } = useGetFoodItemQuery(+params.id);
@@ -96,6 +97,9 @@ const ItemDetails = ({ params }) => {
               </ul>
             </div>
           )}
+          <div>
+            <ReviewInputForm />
+          </div>
 
           {/* Additional Details and User-generated Content */}
           {item.additionalDetails && (
