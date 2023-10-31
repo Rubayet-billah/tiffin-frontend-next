@@ -30,6 +30,14 @@ const ItemCard = ({ item }) => {
           <div className="badge badge-outline">Price: ${price}</div>
         </div>
       </div>
+      {/* <div>
+        <button className="btn text-white bg-green-500 w-1/2 hover:bg-green-400 rounded-none rounded-bl">
+          Order Now
+        </button>
+        <button className="btn text-white bg-blue-500 w-1/2 hover:bg-blue-400 rounded-none rounded-br">
+          Add To Cart
+        </button>
+      </div> */}
     </div>
   );
 };

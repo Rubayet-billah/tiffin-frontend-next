@@ -1,20 +1,26 @@
 "use client";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import Link from "next/link";
 import { addItemToCart } from "@/redux/features/cartSlice";
 import UserReview from "@/components/FoodItem/UserReview";
 import toast from "react-hot-toast";
 import { useGetFoodItemQuery } from "@/redux/api/foodApi";
 import Loading from "@/components/ui/Loading";
+import { useRouter } from "next/navigation";
 
 const ItemDetails = ({ params }) => {
   const { data: item, isLoading } = useGetFoodItemQuery(+params.id);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleAddtoCart = (item) => {
     dispatch(addItemToCart(item));
     toast.success(`${item.name} added to cart`);
+  };
+
+  const handleAddOrder = (item) => {
+    dispatch(addItemToCart(item));
+    router.push("/item/cart");
   };
 
   if (isLoading) {
@@ -65,15 +71,15 @@ const ItemDetails = ({ params }) => {
 
           {/* Share and Call-to-Action Buttons */}
           <div className="mt-4">
-            <Link
-              href={`/item/order`}
+            <button
+              onClick={() => handleAddOrder(item)}
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-4"
             >
               Order Now
-            </Link>
+            </button>
             <button
               onClick={() => handleAddtoCart(item)}
-              className="px-4 py-2 bg-green-500 text-white rounded hover-bg-green-600"
+              className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded hover-bg-green-600"
             >
               Add to Cart
             </button>

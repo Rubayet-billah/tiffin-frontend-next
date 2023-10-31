@@ -37,13 +37,14 @@ const ItemsPage = () => {
   };
 
   const handleFilteringChange = (event) => {
-    console.log(event.target.value);
     dispatch(updateFilteringOption(event.target.value));
+    setPage(1);
   };
 
   const handleReset = () => {
     setSearchValue("");
     dispatch(resetFilters());
+    setPage(1);
   };
 
   // let content;

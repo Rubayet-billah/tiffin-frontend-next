@@ -1,4 +1,4 @@
-# Tiffin Delivery Project
+# Tiffin (Food Delivery Application)
 
 **Live Link:** [Tiffin App](https://tiffin-frontend-next.vercel.app/)
 
