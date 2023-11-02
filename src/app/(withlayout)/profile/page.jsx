@@ -10,12 +10,12 @@ const UserProfile = () => {
   return (
     <div className="bg-white p-4 shadow-lg rounded-md mx-auto max-w-3xl">
       <div className="text-center mb-4">
-        <Image
+        <img
           src={user?.image || userAvatar}
           alt="User Profile Picture"
           className="w-20 h-20 rounded-full mx-auto"
-          height={80}
-          width={80}
+          // height={80}
+          // width={80}
         />
         <h2 className="text-xl font-semibold mt-2">
           {user?.name || "Anonymous User"}
