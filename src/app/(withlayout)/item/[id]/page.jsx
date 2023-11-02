@@ -98,7 +98,7 @@ const ItemDetails = ({ params }) => {
             </div>
           )}
           <div>
-            <ReviewInputForm />
+            <ReviewInputForm itemId={item?.id} />
           </div>
 
           {/* Additional Details and User-generated Content */}

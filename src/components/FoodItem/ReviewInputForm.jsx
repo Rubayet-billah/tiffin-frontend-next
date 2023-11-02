@@ -1,16 +1,23 @@
+import { useAddReviewMutation } from "@/redux/api/foodApi";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
-const ReviewInputForm = ({ onSubmit }) => {
+const ReviewInputForm = ({ itemId }) => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
+  const { user } = useSelector((state) => state.auth);
+  const [addReview] = useAddReviewMutation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const review = { rating, comment };
-    // onSubmit(review);
-    setRating(0);
+    const review = { userEmail: user.email, rating, comment };
     setComment("");
-    console.log(review);
+    console.log({ review });
+    const res = await addReview({ id: itemId, review });
+    if (res.data) {
+      toast.success("Thanks For Your Review");
+    }
   };
 
   return (
