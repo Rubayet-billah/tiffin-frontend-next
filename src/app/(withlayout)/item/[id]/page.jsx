@@ -8,11 +8,28 @@ import { useGetFoodItemQuery } from "@/redux/api/foodApi";
 import Loading from "@/components/ui/Loading";
 import { useRouter } from "next/navigation";
 import ReviewInputForm from "@/components/FoodItem/ReviewInputForm";
+import { useState } from "react";
+
+const MAX_REVIEWS_PER_PAGE = 3; // Maximum reviews to show per page
 
 const ItemDetails = ({ params }) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: item, isLoading } = useGetFoodItemQuery(+params.id);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const reviews = item?.reviews || [];
+  const totalReviews = reviews.length;
+
+  // Calculate the range of reviews to display on the current page
+  const startIndex = (currentPage - 1) * MAX_REVIEWS_PER_PAGE;
+  const endIndex = currentPage * MAX_REVIEWS_PER_PAGE;
+
+  const reviewsToShow = reviews.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleAddtoCart = (item) => {
     dispatch(addItemToCart(item));
@@ -87,16 +104,35 @@ const ItemDetails = ({ params }) => {
           </div>
 
           {/* User Reviews and Ratings */}
-          {item.reviews && item.reviews.length > 0 && (
+          {totalReviews > 0 && (
             <div className="mt-4">
               <p className="text-gray-600">Rating: {item?.rating || 4.5}/5</p>
               <ul>
-                {item.reviews.map((review, index) => (
+                {reviewsToShow.map((review, index) => (
                   <UserReview key={index} review={review} />
                 ))}
               </ul>
+              {totalReviews > MAX_REVIEWS_PER_PAGE && (
+                <div className="mt-2 flex gap-2">
+                  <button
+                    className="btn btn-sm rounded"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <button
+                    className="btn btn-sm rounded"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={endIndex >= totalReviews}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           )}
+
           <div>
             <ReviewInputForm itemId={item?.id} />
           </div>
